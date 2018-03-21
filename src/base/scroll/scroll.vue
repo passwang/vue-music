@@ -30,6 +30,10 @@ export default {
     pulldown: {
       type: Boolean,
       default: false
+    },
+    beforeScroll: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
@@ -56,8 +60,8 @@ export default {
         if (this.pullup) {
           let that = this
           this.scroll.on('scrollEnd', () => {
-            if (this.scroll.y <= (this.maxScrollY + 50)) {
-              that.$emit('scrollEnd')
+            if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
+              that.$emit('scrollToEnd')
             }
           })
         }
@@ -65,8 +69,13 @@ export default {
           let that = this
           this.scroll.on('touchend', (pos) => {
             if (pos.y > 50) {
-              that.$emit('pulldown')
+              that.$emit('scrollToTop')
             }
+          })
+        }
+        if (this.beforeScroll) {
+          this.scroll.on('beforeScrollStart', () => {
+            this.$emit('beforeScroll')
           })
         }
       })

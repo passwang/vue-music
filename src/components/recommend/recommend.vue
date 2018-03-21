@@ -15,7 +15,7 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li class="item" v-for="item in descList">
+            <li class="item" v-for="item in descList" @click="selectItem(item)">
               <div class="icon">
                 <img  width="60" height="60" v-lazy="item.picUrl">
               </div>
@@ -32,12 +32,14 @@
       </div>
       </div>
       </scroll>
+      <router-view></router-view>
     </div>
 </template>
 <script type="text/ecmascript-6">
 import slider from 'base/slider/slider.vue'
 import scroll from 'base/scroll/scroll.vue'
 import loading from 'base/loading/loading.vue'
+import {mapMutations} from 'vuex'
 import axios from 'axios'
 const ERR_OK = 200
 export default {
@@ -63,6 +65,7 @@ export default {
       axios.get('/api/personalized').then(res => {
         if (res.data.code === ERR_OK) {
           this.descList = res.data.result
+          console.log(this.descList)
         }
       })
     },
@@ -71,7 +74,16 @@ export default {
         this.$refs.scroll.refresh()
         this.checkLoading = true
       }
-    }
+    },
+    selectItem(item) {
+      this.$router.push({
+        path: `/recommend/${item.id}`
+      })
+      this.setDesc(item)
+    },
+    ...mapMutations({
+      setDesc: 'SET_DESC'
+    })
   },
   components: {
     slider,
@@ -90,6 +102,7 @@ export default {
     bottom: 0
     .recommend-content
       height: 100%
+      position: relative
       overflow: hidden
       .slider-wrapper
         position: relative

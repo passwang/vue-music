@@ -25,8 +25,10 @@ export function createSong(musicData) {
     duration: musicData.dt
   })
 }
-
-function filterSinger(singer) {
+export function createPic(picId) {
+  return `http://p4.music.126.net/cUTk0ewrQtYGP2YpPZoUng==/${picId}.jpg`
+}
+export function filterSinger(singer) {
   let ret = []
   if (!singer) {
     return

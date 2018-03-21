@@ -20,6 +20,15 @@ const matutations = {
   },
   [types.SET_CURRENT_INDEX](state, index) {
     state.currentIndex = index
+  },
+  [types.SET_DESC](state, desc) {
+    state.desc = desc
+  },
+  [types.SET_TOP_LIST](state, toplist) {
+    state.toplist = toplist
+  },
+  [types.SET_HISTORY](state, history) {
+    state.searchHistory = history
   }
 }
 export default matutations

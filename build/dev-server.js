@@ -23,20 +23,18 @@ const proxyTable = config.dev.proxyTable
 
 const app = express()
 const apiRouter = express.Router()
-apiRouter.get('/getDiscList', function (req,res) {
-  let url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
-  axios.get(url, {
-    referer: 'https://c.y.qq.com/',
-    host: 'c.y.qq.com'
-  }
-  // params: req.query
-).then(response => {
-  res.json = response.data
-}).catch(e => {
-  console.log(e)
-})
-})
-app.use('/api', apiRouter)
+// apiRouter.get('/getSearch', function (req,res) {
+//   let url = 'http://music.163.com/weapi/search/hot'
+//   axios.post(url, {
+//     referer: 'http://music.163.com/m/',
+//     host: 'music.163.com'
+// }).then(response => {
+//   res.json = response.data
+// }).catch(e => {
+//   console.log(e)
+// })
+// })
+// app.use('/apii', apiRouter)
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {

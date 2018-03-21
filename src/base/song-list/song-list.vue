@@ -3,7 +3,7 @@
     <ul>
       <li class="item" v-for="(item,index) in songs" @click.prevent="selectItem(item,index)">
         <div class="rank">
-          <span></span>
+          <span :class="getRankCls(index)" v-text="getRankText(index)"></span>
         </div>
         <div class="content">
           <h2 class="name">{{item.name}}</h2>
@@ -24,6 +24,12 @@ export default {
   methods: {
     selectItem(item, index) {
       this.$emit('select', item, index)
+    },
+    getRankCls(index) {
+      return 'text'
+    },
+    getRankText(index) {
+      return index + 1
     }
   }
 }

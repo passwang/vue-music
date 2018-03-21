@@ -227,7 +227,7 @@ export default {
     },
     _getSongInfo() {
       axios.get(`api/music/url?id=${this.currentSong.id}`).then(res => {
-        // console.log(res)
+        console.log(res)
         if (res.data.code === ERR_OK) {
           this.songInfo = res.data.data[0]
           // console.log(this.songInfo)
@@ -236,14 +236,14 @@ export default {
     },
     _getSongLyric() {
       axios.get(`api/lyric?id=${this.currentSong.id}`).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.data.code === ERR_OK) {
           // this.songLyric = res.data.lrc.lyric
           this.songLyric = new Lyric(res.data.lrc.lyric, this.handler)
           if (this.playing) {
             this.songLyric.play()
           }
-          console.log(this.songLyric)
+          // console.log(this.songLyric)
         }
       }).catch(() => {
         this.playingLyric = ''
@@ -252,7 +252,7 @@ export default {
       })
     },
     handler({lineNum, txt}) {
-      this.currentLineNumber = lineNum + 1
+      this.currentLineNumber = lineNum
       if (lineNum > 5) {
         let lineEl = this.$refs.lyricLine[lineNum - 5]
         this.$refs.lyricList.scrollToElement(lineEl, 1000)
